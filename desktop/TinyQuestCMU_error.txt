@@ -1,8 +1,6 @@
-java.lang.IndexOutOfBoundsException: index can't be >= size: 1 >= 1
-	at com.badlogic.gdx.utils.Array.get(Array.java:155)
-	at com.badlogic.gdx.maps.MapLayers.get(MapLayers.java:31)
-	at com.badlogic.gdx.maps.tiled.renderers.BatchTiledMapRenderer.render(BatchTiledMapRenderer.java:147)
-	at io.github.tinyquestcmu.screens.IntroScreen.render(IntroScreen.java:93)
+java.lang.ArrayIndexOutOfBoundsException: Index 2 out of bounds for length 2
+	at io.github.tinyquestcmu.screens.IntroScreen.handleInput(IntroScreen.java:191)
+	at io.github.tinyquestcmu.screens.IntroScreen.render(IntroScreen.java:111)
 	at com.badlogic.gdx.Game.render(Game.java:48)
 	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:387)
 	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:193)

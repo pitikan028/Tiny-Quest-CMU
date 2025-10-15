@@ -3,9 +3,7 @@ package io.github.tinyquestcmu.screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.Color;
-import io.github.tinyquestcmu.TinyQuestCMUGame;
 
 public abstract class BaseScreen implements Screen {
     protected final TinyQuestCMUGame game;

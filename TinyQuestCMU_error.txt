@@ -1,15 +1,6 @@
-com.badlogic.gdx.utils.SerializationException: Error parsing file: core/src/main/resources/assets/tmx/village
-	at com.badlogic.gdx.utils.XmlReader.parse(XmlReader.java:84)
-	at com.badlogic.gdx.maps.tiled.TmxMapLoader.load(TmxMapLoader.java:70)
-	at com.badlogic.gdx.maps.tiled.TmxMapLoader.load(TmxMapLoader.java:59)
-	at io.github.tinyquestcmu.TinyQuestCMUGame.create(TinyQuestCMUGame.java:22)
-	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.initializeListener(Lwjgl3Window.java:416)
-	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:366)
-	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:193)
-	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:167)
+java.lang.IllegalStateException: GLFW may only be used on the main thread and that thread must be the first thread in the process. Please run the JVM with -XstartOnFirstThread. This check may be disabled with Configuration.GLFW_CHECK_THREAD0.
+	at org.lwjgl.glfw.EventLoop.check(EventLoop.java:33)
+	at org.lwjgl.glfw.GLFW.glfwInit(GLFW.java:1078)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.initializeGlfw(Lwjgl3Application.java:89)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:139)
 	at io.github.tinyquestcmu.desktop.DesktopLauncher.main(DesktopLauncher.java:26)
-Caused by: com.badlogic.gdx.utils.GdxRuntimeException: File not found: core\src\main\resources\assets\tmx\village (Internal)
-	at com.badlogic.gdx.files.FileHandle.read(FileHandle.java:142)
-	at com.badlogic.gdx.files.FileHandle.reader(FileHandle.java:169)
-	at com.badlogic.gdx.utils.XmlReader.parse(XmlReader.java:82)
-	... 8 more

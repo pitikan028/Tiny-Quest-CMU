@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;             // ✅ สำคัญ
 import com.badlogic.gdx.utils.GdxRuntimeException;   // ✅ สำคัญ
-import io.github.tinyquestcmu.TinyQuestCMUGame;
 import io.github.tinyquestcmu.quest.*;
 
 public class EndingScreen extends BaseScreen {

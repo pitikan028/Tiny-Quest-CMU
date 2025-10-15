@@ -2,7 +2,7 @@ package io.github.tinyquestcmu.desktop;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import io.github.tinyquestcmu.TinyQuestCMUGame;
+import io.github.tinyquestcmu.screens.TinyQuestCMUGame;
 
 public class DesktopLauncher {
     public static void main (String[] arg) {
