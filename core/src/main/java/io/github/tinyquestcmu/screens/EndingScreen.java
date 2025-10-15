@@ -51,7 +51,7 @@ public class EndingScreen extends BaseScreen {
         if (timer > 2f) game.font.draw(game.batch, "Press ENTER to restart", 300, 100);
         game.batch.end();
 
-        drawHud();
+//        drawHud();
 
         if (timer > 2f && (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))) {
             game.setScreen(new IntroScreen(game));

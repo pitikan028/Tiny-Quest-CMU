@@ -37,15 +37,15 @@ public class BridgeScreen extends BaseScreen {
     }
 
     @Override public void show() {
-        
+
         // Load Tiled map
         try {
-            tiledMap = new TmxMapLoader().load("assets/tmx/bridge.tmx");
+            tiledMap = new TmxMapLoader().load("assets/tmx/StartingHouseMap.tmx");
             tiledRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1f);
         } catch (Exception e) {
             System.out.println("[TinyQuestCMU] TMX load failed: bridge => " + e.getMessage());
         }
-    
+
         legend.setTexture(loadTex("assets/kawin_white_elephant.png"));
 
         tGrass=loadTex("assets/grass.png"); tDirt=loadTex("assets/dirt.png"); tWater=loadTex("assets/water.png"); tBridge=loadTex("assets/bridge.png"); tHouse=loadTex("assets/house.png"); tTree=loadTex("assets/tree.png"); tSpecial=loadTex("assets/special_tree.png"); texPlayer=loadTex("assets/player.png"); player.setTexture(texPlayer); legend.setTexture(loadTex("assets/kawin_white_elephant.png"));
@@ -54,7 +54,7 @@ public class BridgeScreen extends BaseScreen {
         for(int x=0;x<25;x++){ data[6][x]=3; data[7][x]=3; }
         for(int x=8;x<17;x++){ data[7][x]=4; }
         map = new TileMap(data,tGrass,tDirt,tWater,tBridge,tHouse,tTree,tSpecial);
-}
+    }
 
     @Override public void render(float dt) {
         clear(0.05f,0.12f,0.18f);
@@ -68,7 +68,7 @@ public class BridgeScreen extends BaseScreen {
         // draw map + sprites
         if(map!=null){
             game.batch.begin();
-        player.drawSprite(game.batch); legend.drawSprite(game.batch);
+            player.drawSprite(game.batch); legend.drawSprite(game.batch);
             map.draw(game.batch);
             game.batch.end();
         }
@@ -78,7 +78,7 @@ public class BridgeScreen extends BaseScreen {
             Dialogue d = new Dialogue(new DialogueNode(
                 "I am Kawin, the White Elephant—guardian by the bridge.",
                 new DialogueNode("Go to the village and help the people.",
-                new DialogueNode("They will guide you into the forest.", null))));
+                    new DialogueNode("They will guide you into the forest.", null))));
             ds.start(d);
             game.questManager.set(QuestFlag.MET_LEGEND);
         }
@@ -99,11 +99,11 @@ public class BridgeScreen extends BaseScreen {
         game.batch.end();
 
         ds.draw(shapes, game.batch, game.font, 800);
-        drawHud();
+//        drawHud();
 
         if(!ds.isActive()){
             game.batch.begin();
-        player.drawSprite(game.batch); legend.drawSprite(game.batch);
+            player.drawSprite(game.batch); legend.drawSprite(game.batch);
             game.font.draw(game.batch, "Press ENTER to go to the village", 270, 80);
             game.batch.end();
             if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){

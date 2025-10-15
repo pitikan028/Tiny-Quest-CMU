@@ -2,77 +2,89 @@ package io.github.tinyquestcmu.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
-import io.github.tinyquestcmu.TinyQuestCMUGame;
 import com.badlogic.gdx.graphics.Texture;
-import io.github.tinyquestcmu.assets.TileMap;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import io.github.tinyquestcmu.actors.Player;
-import io.github.tinyquestcmu.actors.NPC;
-import io.github.tinyquestcmu.quest.*;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import io.github.tinyquestcmu.TinyQuestCMUGame;
+import io.github.tinyquestcmu.actors.NPC;
+import io.github.tinyquestcmu.actors.Player;
+import io.github.tinyquestcmu.quest.QuestFlag;
 
 public class ForestScreen extends BaseScreen {
-    private Texture loadTex(String path){
-        try { return new Texture(path); } catch (GdxRuntimeException e){ System.out.println("[TinyQuestCMU] Missing texture: "+path+" => "+e.getMessage()); return null; }
+
+    private TiledMap map;
+    private OrthogonalTiledMapRenderer tiledRenderer;
+
+    private Player player;
+    private NPC specialTree = new NPC("Special Tree", "Glowing Bark", 400, 220);
+    private float startX, startY;
+
+    public ForestScreen(TinyQuestCMUGame game) {
+        this(game, 60, 240);
     }
 
-    private TileMap map;
-    private TiledMap tiledMap;
-    private OrthogonalTiledMapRenderer tiledRenderer;
-    private Texture tGrass, tDirt, tWater, tBridge, tHouse, tTree, tSpecial;
-    private Texture texPlayer;
-    private Player player = new Player(60, 60);
-    private NPC specialTree = new NPC("Special Tree", "Glowing Bark", 400, 220);
+    public ForestScreen(TinyQuestCMUGame game, float startX, float startY) {
+        super(game);
+        this.startX = startX;
+        this.startY = startY;
+    }
 
-    public ForestScreen(TinyQuestCMUGame game){ super(game); }
+    @Override
+    public void show() {
+        map = new TmxMapLoader().load("assets/tmx/ForestMap.tmx");
+        tiledRenderer = new OrthogonalTiledMapRenderer(map);
 
-    @Override public void render(float dt) {
-        clear(0.02f,0.18f,0.06f);
+        // สร้าง Player ขึ้นมา แล้วปล่อยให้ constructor ของ Player โหลด Texture เอง
+        player = new Player(startX, startY);
+
+        // <<< ลบบรรทัดนี้ออก >>>
+        // player.setTexture(new Texture("assets/player.png"));
+        // เพราะ Player โหลด Texture ของตัวเองอยู่แล้ว ไม่ต้องโหลดซ้ำ
+    }
+
+    @Override
+    public void render(float dt) {
+        super.render(dt);
+
         player.update(dt);
 
-        // draw TMX map (if available)
-        if(tiledRenderer != null){
-            tiledRenderer.setView(cam);
-            tiledRenderer.render();
-        }
-        // draw map + sprites
-        if(map!=null){
-            game.batch.begin();
-        player.drawSprite(game.batch);
-            map.draw(game.batch);
-            game.batch.end();
-        }
+        tiledRenderer.setView(cam);
+        tiledRenderer.render();
 
-
-        boolean nearTree = specialTree.getBounds().overlaps(player.getBounds());
-        if(nearTree){
-            game.questManager.set(QuestFlag.FOUND_SPECIAL_TREE);
-        }
-
-        shapes.begin(com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Filled);
-        shapes.setColor(Color.FOREST); shapes.rect(0,0,800,480);
-        shapes.setColor(Color.LIME); // normal trees
-        for(int i=0;i<8;i++) shapes.rect(80 + i*80, 120 + (i%2)*60, 12, 24);
-        shapes.setColor(Color.RED); specialTree.draw(shapes); // special tree
-        shapes.setColor(Color.WHITE); player.draw(shapes);
-        shapes.end();
-
+        // ใช้ Projection Matrix ของกล้อง เพื่อให้ UI ที่วาดเลื่อนตามกล้อง
+        game.batch.setProjectionMatrix(cam.combined);
         game.batch.begin();
         player.drawSprite(game.batch);
         specialTree.drawLabel(game.batch, game.font);
         player.drawLabel(game.batch, game.font);
-        if(nearTree) game.font.draw(game.batch, "Press ENTER to proceed", 310, 84);
+
+        boolean nearTree = specialTree.getBounds().overlaps(player.getBounds());
+        if (nearTree) {
+            game.font.draw(game.batch, "Press ENTER to proceed", player.getX() - 80, player.getY() - 20);
+            game.questManager.set(QuestFlag.FOUND_SPECIAL_TREE);
+        }
         game.batch.end();
 
-        drawHud();
-
-        if(nearTree && Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
+        if (nearTree && Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             game.setScreen(new RescueScreen(game));
+        }
+
+        if (player.getX() < 10) {
+            game.setScreen(new VillageScreen(game));
+        }
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        if (map != null) map.dispose();
+        if (tiledRenderer != null) tiledRenderer.dispose();
+
+        // บรรทัดนี้จะทำงานได้ถูกต้องแล้ว
+        if (player != null) {
+            player.dispose();
         }
     }
 }
