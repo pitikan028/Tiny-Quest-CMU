@@ -12,25 +12,24 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/actors/NPC.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/actors/NPC.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/actors/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/actors/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/BridgeScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/BridgeScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/EndingScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/EndingScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/ForestScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/ForestScreen.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/IntroScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/IntroScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/RescueScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/RescueScreen.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/libs/core.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/resources/main/assets/sprites/ansia_sheet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/resources/main/assets/sprites/chest_closed.png" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/resources/main/assets/sprites/chest_closed.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/resources/main/assets/sprites/chest_open.png" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/resources/main/assets/sprites/chest_open.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/resources/main/assets/sprites/enemy_sprite.png" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/resources/main/assets/sprites/enemy_sprite.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/resources/main/assets/sprites/pavo_sheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/resources/main/assets/sprites/pavo_sheet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/resources/main/assets/sprites/rin_sheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/resources/main/assets/sprites/rin_sheet.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/compileTransaction/stash-dir/BridgeScreen.class.uniqueId1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/compileTransaction/stash-dir/IntroScreen.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/compileTransaction/stash-dir/ForestScreen.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/compileTransaction/stash-dir/VillageScreen.class.uniqueId2" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/actors/NPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/actors/NPC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/actors/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/actors/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/BridgeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/BridgeScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/EndingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/EndingScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/ForestScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/ForestScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/IntroScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/IntroScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/RescueScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/RescueScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/assets/sprites/ansia_sheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/assets/ansia_sheet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/assets/sprites/chest_closed.png" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/assets/sprites/chest_closed.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/assets/sprites/chest_open.png" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/assets/sprites/chest_open.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/assets/sprites/enemy_sprite.png" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/assets/sprites/enemy_sprite.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/assets/sprites/pavo_sheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/assets/sprites/pavo_sheet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/assets/sprites/rin_sheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/assets/sprites/rin_sheet.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +88,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Donut",
+    "git-widget-placeholder": "Baton",
     "last_opened_file_path": "C:/Users/USER/Downloads/Tiny Quest CMU"
   }
 }]]></component>
