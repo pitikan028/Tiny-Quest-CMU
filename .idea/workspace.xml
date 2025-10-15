@@ -4,34 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f208296-4623-4872-ac7e-f8a4f7f9fdc4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/actors/NPC.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/actors/NPC.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/actors/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/actors/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/BridgeScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/BridgeScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/EndingScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/EndingScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/ForestScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/ForestScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/IntroScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/IntroScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/RescueScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/io/github/tinyquestcmu/screens/RescueScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/libs/core.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/resources/main/assets/sprites/ansia_sheet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/compileTransaction/stash-dir/BridgeScreen.class.uniqueId1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/compileTransaction/stash-dir/IntroScreen.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/actors/NPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/actors/NPC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/actors/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/actors/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/BridgeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/BridgeScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/EndingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/EndingScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/ForestScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/ForestScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/IntroScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/IntroScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/RescueScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/github/tinyquestcmu/screens/RescueScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/assets/sprites/ansia_sheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/assets/ansia_sheet.png" afterDir="false" />
-    </list>
+    <list default="true" id="5f208296-4623-4872-ac7e-f8a4f7f9fdc4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,6 +45,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "nathwrrne"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/pitikan028/Tiny-Quest-CMU.git",
+    "accountId": "984830ff-b200-40f0-874d-9a88e3ff1b0d"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -80,19 +65,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Tiny Quest CMU [run].executor": "Run",
-    "Gradle.Tiny Quest CMU.executor": "Run",
-    "Gradle.Tiny Quest CMU:desktop [:desktop:io.github.tinyquestcmu.desktop.DesktopLauncher.main()].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Donut",
-    "last_opened_file_path": "C:/Users/USER/Downloads/Tiny Quest CMU"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Tiny Quest CMU [run].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tiny Quest CMU.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tiny Quest CMU:desktop [:desktop:io.github.tinyquestcmu.desktop.DesktopLauncher.main()].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Donut&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/USER/Downloads/Tiny Quest CMU&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\USER\Downloads\Tiny-Quest-CMU\core\src\main\resources\assets" />
