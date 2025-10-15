@@ -10,79 +10,70 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 public class Player extends Entity {
     private float speed = 120f;
-    private String name = "Isne12";
+    private String name = "Entaneer ISNE12";
 
+    // --- Animation Textures ---
     private Texture[] frontFrames, backFrames, leftFrames, rightFrames;
+    private Texture attackLeftTexture, attackRightTexture;
     private float animTime = 0f;
     private boolean isMoving = false;
-    private int facing = 0; // 0=down, 1=left, 2=right, 3=up
+    private int facing = 0;
 
+    // --- Attack State ---
+    private boolean isAttacking = false;
+    private float attackAnimDuration = 0.3f;
+    private float attackAnimTimer = 0f;
     private float attackCooldown = 0.5f;
     private float attackTimer = 0f;
 
+    // ★ 1. เพิ่มค่าคงที่สำหรับขนาดตัวละคร ★
+    private static final float NORMAL_WIDTH = 32;
+    private static final float NORMAL_HEIGHT = 48;
+    private static final float ATTACK_WIDTH = 48;  // ขนาดใหม่ตอนโจมตี (ใหญ่ขึ้น 1.5 เท่า)
+    private static final float ATTACK_HEIGHT = 72; // ขนาดใหม่ตอนโจมตี (ใหญ่ขึ้น 1.5 เท่า)
+
     public Player(float x, float y) {
-        super(x, y, 32, 48);
+        super(x, y, NORMAL_WIDTH, NORMAL_HEIGHT);
 
         try {
-            frontFrames = new Texture[] {
-                new Texture("assets/Char/Man_Stand.png"),
-                new Texture("assets/Char/Man_StandLeft.png"),
-                new Texture("assets/Char/Man_StandRight.png")
-            };
-            backFrames = new Texture[] {
-                new Texture("assets/Char/Man_Back.png"),
-                new Texture("assets/Char/Man_BackLeft.png"),
-                new Texture("assets/Char/Man_BackRight.png")
-            };
-            leftFrames = new Texture[] {
-                new Texture("assets/Char/Man_StandLeft.png"),
-                new Texture("assets/Char/Man_Left1.png"),
-                new Texture("assets/Char/Man_Left2.png")
-            };
-            rightFrames = new Texture[] {
-                new Texture("assets/Char/Man_StandRight.png"),
-                new Texture("assets/Char/Man_Right1.png"),
-                new Texture("assets/Char/Man_Right2.png")
-            };
+            // Load walking textures
+            frontFrames = new Texture[] { new Texture("assets/Char/Man_Stand.png"), new Texture("assets/Char/Man_StandLeft.png"), new Texture("assets/Char/Man_StandRight.png") };
+            backFrames = new Texture[] { new Texture("assets/Char/Man_Back.png"), new Texture("assets/Char/Man_BackLeft.png"), new Texture("assets/Char/Man_BackRight.png") };
+            leftFrames = new Texture[] { new Texture("assets/Char/Man_StandLeft.png"), new Texture("assets/Char/Man_Left1.png"), new Texture("assets/Char/Man_Left2.png") };
+            rightFrames = new Texture[] { new Texture("assets/Char/Man_StandRight.png"), new Texture("assets/Char/Man_Right1.png"), new Texture("assets/Char/Man_Right2.png") };
+
+            // Load attack textures
+            attackLeftTexture = new Texture("assets/Char/Man_Attack_Left.png");
+            attackRightTexture = new Texture("assets/Char/Man_Attack_Right.png");
+
         } catch (GdxRuntimeException e) {
             System.out.println("ERROR: Could not load player textures: " + e.getMessage());
         }
     }
 
     public void update(float dt) {
+        if (isAttacking) {
+            attackAnimTimer -= dt;
+            if (attackAnimTimer <= 0) {
+                isAttacking = false;
+            }
+            return;
+        }
+
+        // --- Movement Logic ---
         isMoving = false;
         float dx = 0, dy = 0;
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) { dx = -speed * dt; facing = 1; isMoving = true; }
+        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) { dx = speed * dt; facing = 2; isMoving = true; }
+        else if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) { dy = speed * dt; facing = 3; isMoving = true; }
+        else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) { dy = -speed * dt; facing = 0; isMoving = true; }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
-            dx = -speed * dt;
-            facing = 1;
-            isMoving = true;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
-            dx = speed * dt;
-            facing = 2;
-            isMoving = true;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
-            dy = speed * dt;
-            facing = 3;
-            isMoving = true;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
-            dy = -speed * dt;
-            facing = 0;
-            isMoving = true;
-        }
-
-        if (isMoving) {
-            animTime += dt;
-            x += dx;
-            y += dy;
-        } else {
-            animTime = 0;
-        }
+        if (isMoving) { animTime += dt; x += dx; y += dy; }
+        else { animTime = 0; }
 
         if (attackTimer > 0) {
             attackTimer -= dt;
         }
-
         super.update(dt);
     }
 
@@ -92,33 +83,46 @@ public class Player extends Entity {
                 System.out.println("Player attacks!");
                 target.takeDamage(10);
                 attackTimer = attackCooldown;
+                isAttacking = true;
+                attackAnimTimer = attackAnimDuration;
             }
         }
     }
 
+    @Override
     public void drawSprite(SpriteBatch batch) {
         Texture currentTexture = null;
+        float drawX = x;
+        float drawY = y;
+        float drawWidth = NORMAL_WIDTH;
+        float drawHeight = NORMAL_HEIGHT;
 
-        if (frontFrames == null) return; // Don't try to draw if textures failed to load
+        // ★ 2. แก้ไข Logic การวาดทั้งหมด ★
+        if (isAttacking) {
+            // ถ้ากำลังโจมตี, ให้ใช้ท่าโจมตีและขนาดใหญ่ขึ้น
+            currentTexture = (facing == 1) ? attackLeftTexture : attackRightTexture;
+            drawWidth = ATTACK_WIDTH;
+            drawHeight = ATTACK_HEIGHT;
 
-        if (!isMoving) {
+            // ปรับตำแหน่งการวาดเพื่อให้ขยายออกจากจุดศูนย์กลาง
+            drawX = x - (ATTACK_WIDTH - NORMAL_WIDTH) / 2;
+            drawY = y - (ATTACK_HEIGHT - NORMAL_HEIGHT) / 2;
+
+        } else if (!isMoving) {
+            // ถ้าไม่เคลื่อนไหว, ให้ใช้ท่ายืน
             if (facing == 0) currentTexture = frontFrames[0];
             else if (facing == 1) currentTexture = leftFrames[0];
             else if (facing == 2) currentTexture = rightFrames[0];
             else if (facing == 3) currentTexture = backFrames[0];
         } else {
-            Texture[] walkFrames = frontFrames;
-            if (facing == 1) walkFrames = leftFrames;
-            else if (facing == 2) walkFrames = rightFrames;
-            else if (facing == 3) walkFrames = backFrames;
-
-            int frameCount = walkFrames.length - 1;
-            int frameIndex = (int)(animTime * 6) % frameCount + 1;
+            // ถ้าเคลื่อนไหว, ให้ใช้ท่าเดิน
+            Texture[] walkFrames = (facing == 1) ? leftFrames : (facing == 2) ? rightFrames : (facing == 3) ? backFrames : frontFrames;
+            int frameIndex = (int)(animTime * 6) % (walkFrames.length - 1) + 1;
             currentTexture = walkFrames[frameIndex];
         }
 
         if (currentTexture != null) {
-            batch.draw(currentTexture, x, y, 32, 48);
+            batch.draw(currentTexture, drawX, drawY, drawWidth, drawHeight);
         }
     }
 
@@ -129,15 +133,13 @@ public class Player extends Entity {
         for (Texture t : backFrames) t.dispose();
         for (Texture t : leftFrames) t.dispose();
         for (Texture t : rightFrames) t.dispose();
+        if (attackLeftTexture != null) attackLeftTexture.dispose();
+        if (attackRightTexture != null) attackRightTexture.dispose();
     }
 
+    // --- Other methods ---
     @Override
     public void draw(ShapeRenderer shapes) { if (frontFrames == null) shapes.rect(x, y, w, h); }
-
-    // ★ FIX: Removed @Override from this method ★
-    public void drawLabel(SpriteBatch batch, BitmapFont font) {
-        if (font != null) font.draw(batch, name, x - 4, y + 58);
-    }
-
+    public void drawLabel(SpriteBatch batch, BitmapFont font) { if (font != null) font.draw(batch, name, x - 4, y + 58); }
     public void setName(String name) { this.name = name; }
 }

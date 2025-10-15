@@ -1,5 +1,6 @@
 package io.github.tinyquestcmu.actors;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -25,6 +26,8 @@ public abstract class Entity {
         // อัปเดตตำแหน่ง rectangle ตามพิกัดล่าสุด
         bounds.setPosition(x, y);
     }
+
+    public abstract void drawSprite(SpriteBatch batch);
 
     public abstract void dispose();
 

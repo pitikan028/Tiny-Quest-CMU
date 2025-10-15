@@ -15,7 +15,7 @@ public class NPC extends Entity {
     private Texture sprite;
 
     public NPC(String name, String role, float x, float y) {
-        super(x, y, 60, 60); // Adjusted size to match drawing
+        super(x, y, 50, 50); // Adjusted size to match drawing
         this.name = name;
         this.role = role;
 
@@ -55,11 +55,11 @@ public class NPC extends Entity {
     }
 
     public void drawSprite(SpriteBatch batch) {
-        if (sprite != null) batch.draw(sprite, (int)x, (int)y, 60, 60);
+        if (sprite != null) batch.draw(sprite, (int)x, (int)y, 50, 50);
     }
 
     public void drawLabel(SpriteBatch batch, BitmapFont font) {
-        font.draw(batch, name + " (" + role + ")", x, y + 42);
+        font.draw(batch, name + " (" + role + ")", x, y + 55);
     }
 
     /**

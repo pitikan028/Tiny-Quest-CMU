@@ -11,7 +11,7 @@ public class Enemy extends Entity {
     public int currentHp;
 
     public Enemy(float x, float y) {
-        super(x, y, 32, 48);
+        super(x, y, 50, 66);
         currentHp = maxHp;
         texture = new Texture("assets/sprites/enemy_sprite.png");
     }
@@ -25,7 +25,7 @@ public class Enemy extends Entity {
 
     public void drawSprite(SpriteBatch batch) {
         if (isAlive()) {
-            batch.draw(texture, x, y, 32, 48);
+            batch.draw(texture, x, y, 50, 66);
         }
     }
 

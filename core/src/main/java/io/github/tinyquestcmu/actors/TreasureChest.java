@@ -10,7 +10,7 @@ public class TreasureChest extends Entity {
     private boolean isOpen = false;
 
     public TreasureChest(float x, float y) {
-        super(x, y, 32, 32); // ขนาดของกล่องสมบัติ
+        super(x, y, 50, 50); // ขนาดของกล่องสมบัติ
 
         try {
             closedTexture = new Texture("assets/sprites/chest_closed.png"); // ★ ต้องมีรูปนี้
@@ -25,7 +25,7 @@ public class TreasureChest extends Entity {
         if (!isOpen) {
             isOpen = true;
             System.out.println("You Must Kill Enemy Slime! and then you will go right "); // แสดงข้อความใน console
-            System.out.println("On the bright to the forrest and you can find some tree for help your brother!");
+            System.out.println("On the bridge to the forrest and you can find some tree for help your brother!");
         }
     }
 
@@ -36,7 +36,7 @@ public class TreasureChest extends Entity {
     public void drawSprite(SpriteBatch batch) {
         Texture currentTexture = isOpen ? openTexture : closedTexture;
         if (currentTexture != null) {
-            batch.draw(currentTexture, x, y, 32, 32);
+            batch.draw(currentTexture, x, y, 50, 50);
         }
     }
 
