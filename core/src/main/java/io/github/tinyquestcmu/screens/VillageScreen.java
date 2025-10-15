@@ -21,7 +21,6 @@ public class VillageScreen extends BaseScreen {
     private Player player;
     private Rectangle exitToForest;
 
-    // ★ 1. ประกาศตัวแปรสำหรับ Object ใหม่ ★
     private TreasureChest chest;
     private Enemy slime;
 
@@ -41,9 +40,9 @@ public class VillageScreen extends BaseScreen {
             player = new Player(150, 250);
             exitToForest = new Rectangle(mapWidth - 32, 0, 32, mapHeight);
 
-            // ★ 2. สร้าง Object ใหม่และกำหนดตำแหน่ง ★
-            chest = new TreasureChest(200, 150);
-            slime = new Enemy(250, 200);
+            // ★ แก้ไขตำแหน่งของกล่องสมบัติที่นี่ ★
+            chest = new TreasureChest(50, 100);
+            slime = new Enemy(100, 100);
 
         } catch (Exception e) {
             System.out.println("ERROR loading VillageScreen: " + e.getMessage());
@@ -54,18 +53,16 @@ public class VillageScreen extends BaseScreen {
         super.render(dt);
         player.update(dt);
 
-        // ★ 3. เพิ่ม Logic การควบคุม ★
-        // เปิดกล่อง
+        // --- Handle Input ---
         boolean isNearChest = player.getBounds().overlaps(chest.getBounds());
         if (isNearChest && Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             chest.open();
         }
-        // โจมตี
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             player.attack(slime);
         }
 
-        // --- วาดทุกอย่าง ---
+        // --- Drawing ---
         if (renderer != null) {
             renderer.setView(cam);
             renderer.render();
@@ -74,17 +71,17 @@ public class VillageScreen extends BaseScreen {
         game.batch.setProjectionMatrix(cam.combined);
         game.batch.begin();
         player.drawSprite(game.batch);
-        chest.drawSprite(game.batch); // วาดกล่อง
-        slime.drawSprite(game.batch); // วาดศัตรู
+        chest.drawSprite(game.batch);
+        slime.drawSprite(game.batch);
         game.batch.end();
 
-        // วาดหลอดเลือด
+        // Draw health bar
         shapes.setProjectionMatrix(cam.combined);
         shapes.begin(com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Filled);
         slime.drawHealthBar(shapes);
         shapes.end();
 
-        // วาด UI
+        // Draw UI
         hudBatch.begin();
         if (isNearChest && !chest.isOpen()) {
             game.font.draw(hudBatch, "Press E to open", 350, 80);
@@ -102,7 +99,6 @@ public class VillageScreen extends BaseScreen {
         if (renderer != null) renderer.dispose();
         if (map != null) map.dispose();
         if (player != null) player.dispose();
-        // ★ 4. อย่าลืม dispose Object ใหม่ ★
         if (chest != null) chest.dispose();
         if (slime != null) slime.dispose();
     }
