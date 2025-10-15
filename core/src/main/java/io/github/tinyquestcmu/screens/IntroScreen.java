@@ -2,14 +2,12 @@ package io.github.tinyquestcmu.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import io.github.tinyquestcmu.TinyQuestCMUGame;
 import io.github.tinyquestcmu.actors.NPC;
 import io.github.tinyquestcmu.actors.Player;
 import io.github.tinyquestcmu.dialogue.Dialogue;
@@ -18,11 +16,7 @@ import io.github.tinyquestcmu.dialogue.DialogueSystem;
 import io.github.tinyquestcmu.quest.QuestFlag;
 
 public class IntroScreen extends BaseScreen {
-
-    // ---------- CONFIG: แก้ชื่อไฟล์ TMX ที่นี่ให้ตรงกับ assets/tmx ของคุณ ----------
-    private static final String MAP_FILE = "assets/tmx/bridge.tmx";
-    // ตัวอย่างถ้าจะใช้ village: private static final String MAP_FILE = "assets/tmx/village.tmx";
-    // ---------------------------------------------------------------------------
+    private static final String MAP_FILE = "assets/tmx/village.tmx";
 
     private Texture loadTex(String path){
         try { return new Texture(path); }
@@ -36,9 +30,18 @@ public class IntroScreen extends BaseScreen {
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer tiledRenderer;
 
-    private Player player = new Player(380, 200);
+    private Player player = new Player(200, 200);
     private NPC parent = new NPC("Parent", "Mom/Dad", 380, 240);
     private DialogueSystem ds = new DialogueSystem();
+
+    //ใช้กับท่าเดิน
+    private int currentFrame = 0;      // เฟรมปัจจุบัน
+    private float walkTime = 0f;       // เวลาเดินสะสม
+    private float frameDuration = 0.2f; // เวลาต่อเฟรม (วินาที)
+    private Texture[] frontWalk, backWalk, leftWalk, rightWalk;
+    private Texture[] previousWalkFrames = null; // เก็บ walkFrames เดิม
+    private float playerX, playerY; //ตำแหน่งตัวละครเป็นแกน X,Y
+    private float speed = 160f; // walk speed
 
     public IntroScreen(TinyQuestCMUGame game){
         super(game);
@@ -67,25 +70,48 @@ public class IntroScreen extends BaseScreen {
         }
 
         // เท็กซ์เจอร์ผู้เล่น/ผู้ปกครอง (ถ้าไม่มีจะวาดเป็นสี่เหลี่ยมแทน)
-        Texture texPlayer = loadTex("assets/sprites/player_sheet.png");
-        if (texPlayer != null) {
-            texPlayer.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-            player.setTexture(texPlayer);
-        }
-        Texture texParent = loadTex("assets/sprites/parent.png"); // ถ้าไม่มีได้
-        if (texParent != null) parent.setTexture(texParent);
+//        Texture texPlayer = loadTex("assets/sprites/player_sheet.png");
+//        if (texPlayer != null) {
+//            texPlayer.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+//            player.setTexture(texPlayer);
+////        }
+//        Texture texParent = loadTex("assets/sprites/parent.png"); // ถ้าไม่มีได้
+//        if (texParent != null) parent.setTexture(texParent);
+
+        // char moving
+        frontWalk = new Texture[] {
+                new Texture("assets/Char/Man_StandLeft.png"),
+                new Texture("assets/Char/Man_Stand.png"),
+                new Texture("assets/Char/Man_StandRight.png"),
+        };
+        backWalk = new Texture[] {
+                new Texture("assets/Char/Man_BackLeft.png"),
+                new Texture("assets/Char/Man_Back.png"),
+                new Texture("assets/Char/Man_BackRight.png")
+        };
+        rightWalk = new Texture[] {
+                new Texture("assets/Char/Man_Right1.png"),
+                new Texture("assets/Char/Man_Right2.png")
+        };
+        leftWalk = new Texture[] {
+                new Texture("assets/Char/Man_Left1.png"),
+                new Texture("assets/Char/Man_Left2.png")
+        };
+
+//        playerX = 380;
+//        playerY = 200;
+        previousWalkFrames = frontWalk; // เริ่มหันหน้า
+        player.setTexture(frontWalk[1]); // เฟรมกลาง
     }
 
     @Override
     public void render(float dt) {
-        clear(0.1f, 0.1f, 0.12f);
 
-        // อัปเดตผู้เล่น + กล้องติดตาม gggg
-        player.update(dt);
+        // อัปเดตผู้เล่น + กล้องติดตาม
+        handleInput(dt);
+//        player.update(dt);
         cam.position.set(player.getX() + 16, player.getY() + 16, 0);
         cam.update();
-
-        tiledRenderer.setView(new OrthographicCamera());
 
         // ---------- วาด TMX ----------
         if (tiledRenderer != null) {
@@ -117,6 +143,63 @@ public class IntroScreen extends BaseScreen {
             game.batch.end();
         }
     }
+
+    private void handleInput(float delta) {
+        float nextX = playerX;
+        float nextY = playerY;
+        boolean moving = false; // เช็คว่ากดปุ่มเดินหรือไม่
+        Texture[] walkFrames = previousWalkFrames; // ค่าดีฟอลต์คือท่าก่อนหน้า
+
+        // ตรวจการกดปุ่ม
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
+            nextY += speed * delta;
+            moving = true;
+            walkFrames = backWalk;
+        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
+            nextY -= speed * delta;
+            moving = true;
+            walkFrames = frontWalk;
+        } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
+            nextX -= speed * delta;
+            moving = true;
+            walkFrames = leftWalk;
+        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+            nextX += speed * delta;
+            moving = true;
+            walkFrames = rightWalk;
+        }
+        if (walkFrames != previousWalkFrames) {
+            currentFrame = 0; // รีเซ็ตเฟรมเมื่อเปลี่ยนทิศทาง
+        }
+
+        // อัปเดตตำแหน่ง
+        playerX = nextX;
+        playerY = nextY;
+
+        if (moving) {
+            if (walkFrames != previousWalkFrames) {
+                currentFrame = 0; // ป้องกัน IndexOutOfBounds เมื่อเปลี่ยนชุดภาพ
+            }
+
+            walkTime += delta;
+            if (walkTime >= frameDuration) {
+                walkTime = 0;
+                currentFrame = (currentFrame + 1) % walkFrames.length;
+            }
+            previousWalkFrames = walkFrames; // จำชุดล่าสุด
+        } else {
+            currentFrame = 1; // ยืนนิ่งแสดงเฟรมกลาง
+        }
+
+        // เซ็ต texture ให้ player ตอนนี้
+        if (previousWalkFrames != null) {
+            player.setTexture(previousWalkFrames[currentFrame]);
+        }
+
+        player.setTexture(previousWalkFrames[currentFrame]);
+        player.setPosition(playerX, playerY);
+    }
+
 
     @Override
     public void dispose() {

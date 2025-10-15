@@ -15,3 +15,10 @@ application {
     mainClass = "io.github.tinyquestcmu.desktop.DesktopLauncher"
     applicationDefaultJvmArgs = ["-Xms256m", "-Xmx1024m"]
 }
+
+tasks.withType(JavaExec) {
+    // บังคับ macOS ให้ใช้ main thread
+    if (org.gradle.internal.os.OperatingSystem.current().isMacOsX()) {
+        jvmArgs += "-XstartOnFirstThread"
+    }
+}

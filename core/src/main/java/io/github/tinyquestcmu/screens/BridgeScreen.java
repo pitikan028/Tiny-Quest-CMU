@@ -3,7 +3,6 @@ package io.github.tinyquestcmu.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import io.github.tinyquestcmu.TinyQuestCMUGame;
 import com.badlogic.gdx.graphics.Texture;
 import io.github.tinyquestcmu.assets.TileMap;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -14,7 +13,6 @@ import io.github.tinyquestcmu.actors.NPC;
 import io.github.tinyquestcmu.dialogue.*;
 import io.github.tinyquestcmu.quest.*;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 public class BridgeScreen extends BaseScreen {

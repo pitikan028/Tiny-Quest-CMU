@@ -85,10 +85,10 @@ public class Player extends Entity {
 
     // ✅ วาดตัวละครตามเฟรมปัจจุบัน
     public void drawSprite(SpriteBatch batch) {
-        if (spriteSheet == null || frames == null) return;
-        int frame = ((int)(animTime * 8)) % cols; // 8 fps
-        TextureRegion tr = frames[facing][frame];
-        batch.draw(tr, (int) x, (int) y, 32, 32);
+        if (spriteSheet != null) {
+            // ปรับขนาดการวาดให้เล็กลง (เช่น 32x32 หรือ 64x64)
+            batch.draw(spriteSheet, x, y, 32, 32); // แทนที่จะใช้ขนาดเต็มของ texture
+        }
     }
 
     // ✅ วาดชื่อผู้เล่นเหนือหัว (แก้ error ใน BridgeScreen)

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import io.github.tinyquestcmu.TinyQuestCMUGame;
 
 public class MainMenuScreen extends BaseScreen {
     private Texture bg;
