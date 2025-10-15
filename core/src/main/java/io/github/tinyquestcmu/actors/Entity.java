@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
  * คลาสพื้นฐานสำหรับทุกตัวละคร (Player, NPC ฯลฯ)
  * มี hitbox (bounds) สำหรับตรวจชน และพิกัดขนาด
  */
-public class Entity {
+public abstract class Entity {
     protected float x, y;     // พิกัด
     protected float w, h;     // ขนาด
     protected Rectangle bounds; // ✅ เพิ่ม hitbox rectangle
@@ -25,6 +25,8 @@ public class Entity {
         // อัปเดตตำแหน่ง rectangle ตามพิกัดล่าสุด
         bounds.setPosition(x, y);
     }
+
+    public abstract void dispose();
 
     public void draw(ShapeRenderer shapes) {
         // subclass override ได้

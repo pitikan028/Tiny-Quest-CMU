@@ -1,18 +1,10 @@
-com.badlogic.gdx.utils.SerializationException: Error parsing file: assets/tmx/Oak_Tree_Small.tsx
-	at com.badlogic.gdx.utils.XmlReader.parse(XmlReader.java:84)
-	at com.badlogic.gdx.maps.tiled.TmxMapLoader.getDependencyFileHandles(TmxMapLoader.java:117)
-	at com.badlogic.gdx.maps.tiled.TmxMapLoader.load(TmxMapLoader.java:74)
-	at com.badlogic.gdx.maps.tiled.TmxMapLoader.load(TmxMapLoader.java:59)
-	at io.github.tinyquestcmu.screens.ForestScreen.show(ForestScreen.java:47)
-	at com.badlogic.gdx.Game.setScreen(Game.java:63)
-	at io.github.tinyquestcmu.screens.VillageScreen.render(VillageScreen.java:102)
+java.lang.IllegalStateException: SpriteBatch.begin must be called before draw.
+	at com.badlogic.gdx.graphics.g2d.SpriteBatch.draw(SpriteBatch.java:554)
+	at com.badlogic.gdx.graphics.g2d.BitmapFontCache.draw(BitmapFontCache.java:249)
+	at com.badlogic.gdx.graphics.g2d.BitmapFont.draw(BitmapFont.java:196)
+	at io.github.tinyquestcmu.screens.IntroScreen.render(IntroScreen.java:87)
 	at com.badlogic.gdx.Game.render(Game.java:48)
 	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:387)
 	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:193)
 	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:167)
 	at io.github.tinyquestcmu.desktop.DesktopLauncher.main(DesktopLauncher.java:26)
-Caused by: com.badlogic.gdx.utils.GdxRuntimeException: File not found: assets\tmx\Oak_Tree_Small.tsx (Internal)
-	at com.badlogic.gdx.files.FileHandle.read(FileHandle.java:142)
-	at com.badlogic.gdx.files.FileHandle.reader(FileHandle.java:169)
-	at com.badlogic.gdx.utils.XmlReader.parse(XmlReader.java:82)
-	... 11 more

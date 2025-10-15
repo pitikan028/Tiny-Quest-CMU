@@ -59,7 +59,7 @@ public class BridgeScreen extends BaseScreen {
         if (legend.isPlayerNear(player.getBounds()) && !ds.isActive()) {
             Dialogue d = new Dialogue(new DialogueNode(
                 "I am Ansia, the goose of Chiang Mai's historical door by the bridge.",
-                new DialogueNode("Go to the village and help the people.",
+                new DialogueNode("Go to the village and help the people by kill enemy slime.",
                     new DialogueNode("They will guide you into the forest.", null))));
             ds.start(d);
             game.questManager.set(QuestFlag.MET_LEGEND);

@@ -20,11 +20,9 @@ public class MainMenuScreen extends BaseScreen {
         if(bg!=null) game.batch.draw(bg, 0, 0, 800, 480);
         game.font.setColor(Color.FOREST);
         game.font.getData().setScale(1.2f);
-        game.font.draw(game.batch, "Tiny Quest CMU", 290, 360);
         game.font.getData().setScale(1f);
         game.font.setColor(Color.WHITE);
-        game.font.draw(game.batch, "Press ENTER to Start", 300, 220);
-        game.font.draw(game.batch, "Press O for Options", 315, 190);
+        game.font.draw(game.batch, "Press ENTER to Start", 330, 205);
         game.batch.end();
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){

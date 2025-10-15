@@ -18,7 +18,7 @@ public class ForestScreen extends BaseScreen {
     private OrthogonalTiledMapRenderer tiledRenderer;
 
     private Player player;
-    private NPC specialTree = new NPC("Special Tree", "Glowing Bark", 400, 220);
+    private NPC specialTree = new NPC("Special Tree", "This tree for help your brother", 400, 220);
     private float startX, startY;
 
     public ForestScreen(TinyQuestCMUGame game) {
