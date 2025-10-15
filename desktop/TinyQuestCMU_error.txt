@@ -1,0 +1,10 @@
+java.lang.IndexOutOfBoundsException: index can't be >= size: 1 >= 1
+	at com.badlogic.gdx.utils.Array.get(Array.java:155)
+	at com.badlogic.gdx.maps.MapLayers.get(MapLayers.java:31)
+	at com.badlogic.gdx.maps.tiled.renderers.BatchTiledMapRenderer.render(BatchTiledMapRenderer.java:147)
+	at io.github.tinyquestcmu.screens.IntroScreen.render(IntroScreen.java:93)
+	at com.badlogic.gdx.Game.render(Game.java:48)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:387)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:193)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:167)
+	at io.github.tinyquestcmu.desktop.DesktopLauncher.main(DesktopLauncher.java:26)

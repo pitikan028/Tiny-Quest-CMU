@@ -1,0 +1,2 @@
+rootProject.name = "TinyQuestCMU"
+include(":core", ":desktop")
