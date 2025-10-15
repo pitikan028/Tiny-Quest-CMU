@@ -22,7 +22,7 @@ public class IntroScreen extends BaseScreen {
     private Player player = new Player(380, 200);
     // ✨ เพิ่ม Rin และ Pavo กลับเข้ามา ✨
     private NPC rin = new NPC("Rin", "Engineer", 340, 240);
-    private NPC pavo = new NPC("Pavo", "Prince", 420, 240);
+    private NPC pavo = new NPC("Pavo", "Prince", 600, 240);
     private DialogueSystem ds = new DialogueSystem();
 
     public IntroScreen(TinyQuestCMUGame game) {

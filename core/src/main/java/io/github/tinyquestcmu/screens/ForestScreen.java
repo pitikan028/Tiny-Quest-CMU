@@ -35,37 +35,43 @@ public class ForestScreen extends BaseScreen {
     public void show() {
         map = new TmxMapLoader().load("assets/tmx/ForestMap.tmx");
         tiledRenderer = new OrthogonalTiledMapRenderer(map);
-
-        // สร้าง Player ขึ้นมา แล้วปล่อยให้ constructor ของ Player โหลด Texture เอง
         player = new Player(startX, startY);
-
-        // <<< ลบบรรทัดนี้ออก >>>
-        // player.setTexture(new Texture("assets/player.png"));
-        // เพราะ Player โหลด Texture ของตัวเองอยู่แล้ว ไม่ต้องโหลดซ้ำ
     }
 
     @Override
     public void render(float dt) {
+        // ★ 1. เรียก BaseScreen เพื่อจัดการ Viewport และเคลียร์จอ ★
         super.render(dt);
 
         player.update(dt);
 
+        // ★ 2. เพิ่มโค้ดให้กล้องตามผู้เล่น ★
+        cam.position.set(player.getX(), player.getY(), 0);
+        cam.update();
+        // ------------------------------------
+
+        // --- วาดแผนที่ ---
         tiledRenderer.setView(cam);
         tiledRenderer.render();
 
-        // ใช้ Projection Matrix ของกล้อง เพื่อให้ UI ที่วาดเลื่อนตามกล้อง
+        // --- วาดตัวละคร (ใช้ batch ของเกมที่เลื่อนตามกล้อง) ---
         game.batch.setProjectionMatrix(cam.combined);
         game.batch.begin();
         player.drawSprite(game.batch);
-        specialTree.drawLabel(game.batch, game.font);
+        specialTree.drawSprite(game.batch); // ควรวาด sprite ของ NPC ด้วย
         player.drawLabel(game.batch, game.font);
+        specialTree.drawLabel(game.batch, game.font);
+        game.batch.end();
 
+        // --- วาด UI (ใช้ hudBatch ที่ไม่เลื่อนตามกล้อง) ---
+        hudBatch.begin();
         boolean nearTree = specialTree.getBounds().overlaps(player.getBounds());
         if (nearTree) {
-            game.font.draw(game.batch, "Press ENTER to proceed", player.getX() - 80, player.getY() - 20);
+            game.font.draw(hudBatch, "Press ENTER to proceed", 310, 84);
             game.questManager.set(QuestFlag.FOUND_SPECIAL_TREE);
         }
-        game.batch.end();
+        hudBatch.end();
+
 
         if (nearTree && Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             game.setScreen(new RescueScreen(game));
@@ -81,10 +87,7 @@ public class ForestScreen extends BaseScreen {
         super.dispose();
         if (map != null) map.dispose();
         if (tiledRenderer != null) tiledRenderer.dispose();
-
-        // บรรทัดนี้จะทำงานได้ถูกต้องแล้ว
-        if (player != null) {
-            player.dispose();
-        }
+        if (player != null) player.dispose();
+        specialTree.dispose();
     }
 }

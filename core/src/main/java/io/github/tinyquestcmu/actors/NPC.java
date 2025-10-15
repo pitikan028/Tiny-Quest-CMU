@@ -26,7 +26,7 @@ public class NPC extends Entity {
             } else if (name.equalsIgnoreCase("Pavo")) {
                 this.sprite = new Texture("assets/sprites/pavo_sheet.png");
             } else if (name.equalsIgnoreCase("Ansia")) {
-                this.sprite = new Texture("assets/sprites/ansia_sheet.png");
+                this.sprite = new Texture("assets/ansia_sheet.png");
             }
         } catch (Exception e) {
             System.out.println("Could not load texture for NPC: " + name);

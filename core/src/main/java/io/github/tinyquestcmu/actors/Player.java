@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 public class Player extends Entity {
     private float speed = 120f;
-    private String name = "Hero";
+    private String name = "Isne12";
 
     // ✨ สร้าง Array สำหรับเก็บ Texture ของแต่ละท่าทาง ✨
     private Texture[] frontFrames;

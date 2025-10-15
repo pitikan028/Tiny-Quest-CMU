@@ -19,8 +19,9 @@ public class BridgeScreen extends BaseScreen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer tiledRenderer;
 
-    private Player player = new Player(100, 200);
-    private NPC legend = new NPC("Kawin", "CMU Legend", 360, 220);
+    // ★ แก้ไขตำแหน่งเริ่มต้นของ Player และ NPC ให้อยู่บนสะพานในแผนที่ ★
+    private Player player = new Player(160, 100);
+    private NPC legend = new NPC("Ansia", "CMU Legend", 220, 100);
     private DialogueSystem ds = new DialogueSystem();
 
     public BridgeScreen(TinyQuestCMUGame game) {
@@ -29,48 +30,46 @@ public class BridgeScreen extends BaseScreen {
 
     @Override
     public void show() {
-        // Load the TMX map for this screen
         try {
-            map = new TmxMapLoader().load("assets/tmx/secondmap.tmx");
+            map = new TmxMapLoader().load("assets/tmx/StartingHouseMap.tmx");
             tiledRenderer = new OrthogonalTiledMapRenderer(map);
         } catch (Exception e) {
             System.out.println("[TinyQuestCMU] TMX load failed: " + e.getMessage());
         }
 
-        // The Player class loads its own texture. We only need to load the legend's.
         try {
-            legend.setTexture(new Texture("assets/kawin_white_elephant.png"));
+            legend.setTexture(new Texture("assets/ansia_sheet.png"));
         } catch (Exception e) {
-            System.out.println("Missing texture: assets/kawin_white_elephant.png");
+            System.out.println("Missing texture: assets/ansia_sheet.png");
         }
     }
 
     @Override
     public void render(float dt) {
-        // 1. Let BaseScreen handle the camera and clearing the screen
         super.render(dt);
 
-        // --- UPDATE LOGIC ---
         player.update(dt);
         ds.update();
 
+        // ★ เพิ่มเข้ามา: ทำให้กล้องตามผู้เล่นไปทุกที่ ★
+        cam.position.set(player.getX(), player.getY(), 0);
+        cam.update();
+        // -----------------------------------------
+
         if (legend.isPlayerNear(player.getBounds()) && !ds.isActive()) {
             Dialogue d = new Dialogue(new DialogueNode(
-                "I am Kawin, the White Elephant—guardian by the bridge.",
+                "I am Ansia, the goose of Chiang Mai's historical door by the bridge.",
                 new DialogueNode("Go to the village and help the people.",
                     new DialogueNode("They will guide you into the forest.", null))));
             ds.start(d);
             game.questManager.set(QuestFlag.MET_LEGEND);
         }
 
-        // --- DRAWING ---
-        // 2. Render the TMX map
         if (tiledRenderer != null) {
             tiledRenderer.setView(cam);
             tiledRenderer.render();
         }
 
-        // 3. Draw sprites and labels
         game.batch.setProjectionMatrix(cam.combined);
         game.batch.begin();
         player.drawSprite(game.batch);
@@ -79,7 +78,6 @@ public class BridgeScreen extends BaseScreen {
         player.drawLabel(game.batch, game.font);
         game.batch.end();
 
-        // 4. Draw UI (Dialogue and HUD)
         ds.draw(shapes, game.batch, game.font, 800);
 
         hudBatch.begin();
@@ -88,7 +86,6 @@ public class BridgeScreen extends BaseScreen {
         }
         hudBatch.end();
 
-        // --- INPUT HANDLING ---
         if (!ds.isActive() && Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             game.setScreen(new VillageScreen(game));
         }
