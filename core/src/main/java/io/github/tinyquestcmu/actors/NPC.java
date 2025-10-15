@@ -19,7 +19,7 @@ public class NPC extends Entity {
         this.name = name;
         this.role = role;
 
-        // ✅ โหลด texture ตามชื่อ
+        //โหลด texture ตามชื่อ
         try {
             if (name.equalsIgnoreCase("Rin")) {
                 this.sprite = new Texture("assets/sprites/rin_sheet.png");

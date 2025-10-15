@@ -9,7 +9,7 @@ public class QuestManager {
     public boolean has(QuestFlag f){ return flags.contains(f); }
 
     public String hud(){
-        if(!has(QuestFlag.TALKED_TO_PARENT)) return "Talk to Mom/Dad";
+        if(!has(QuestFlag.TALKED_TO_PARENT)) return "Talk to Rin/Pavo";
         if(!has(QuestFlag.MET_LEGEND)) return "Find the legend at the bridge";
         if(!has(QuestFlag.GOT_FOREST_MISSION)) return "Go to village for a mission";
         if(!has(QuestFlag.FOUND_SPECIAL_TREE)) return "Find the special tree in forest";

@@ -43,7 +43,7 @@ public class RescueScreen extends BaseScreen {
         player.update(dt);
         ds.update();
 
-        // ★ เพิ่มเข้ามา: ทำให้กล้องตามผู้เล่น ★
+        // เพิ่มเข้ามา: ทำให้กล้องตามผู้เล่น
         cam.position.set(player.getX(), player.getY(), 0);
         cam.update();
         // ------------------------------------

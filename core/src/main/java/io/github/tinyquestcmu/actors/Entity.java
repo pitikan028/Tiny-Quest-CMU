@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 public abstract class Entity {
     protected float x, y;     // พิกัด
     protected float w, h;     // ขนาด
-    protected Rectangle bounds; // ✅ เพิ่ม hitbox rectangle
+    protected Rectangle bounds; // เพิ่ม hitbox rectangle
 
     public Entity(float x, float y, float w, float h) {
         this.x = x;

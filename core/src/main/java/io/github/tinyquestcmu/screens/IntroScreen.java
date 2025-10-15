@@ -48,9 +48,9 @@ public class IntroScreen extends BaseScreen {
 
     @Override
     public void render(float dt) {
-        super.render(dt); // ✨ สำคัญมาก: เรียก BaseScreen เพื่อจัดการ Camera และเคลียร์จอ
+        super.render(dt); // สำคัญมาก: เรียก BaseScreen เพื่อจัดการ Camera และเคลียร์จอ
 
-        // ✨ ให้ Player จัดการการเคลื่อนไหวของตัวเอง ✨
+        //  ให้ Player จัดการการเคลื่อนไหวของตัวเอง
         player.update(dt);
         ds.update();
 
