@@ -19,7 +19,8 @@ public class BridgeScreen extends BaseScreen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer tiledRenderer;
 
-    // ★ แก้ไขตำแหน่งเริ่มต้นของ Player และ NPC ให้อยู่บนสะพานในแผนที่ ★
+    // แก้ไขตำแหน่งเริ่มต้นของ Player และ NPC ให้อยู่บนสะพานในแผนที่ โดยกำหนดค่าให้แกน x และ y
+    //Set the starting X and Y coordinates to place them on the bridge in the map
     private Player player = new Player(160, 100);
     private NPC legend = new NPC("Ansia", "CMU Legend", 220, 100);
     private DialogueSystem ds = new DialogueSystem();
@@ -38,7 +39,7 @@ public class BridgeScreen extends BaseScreen {
         }
 
         try {
-            legend.setTexture(new Texture("assets/ansia_sheet.png"));
+            legend.setTexture(new Texture("assets/sprites/ansia_sheet.png"));
         } catch (Exception e) {
             System.out.println("Missing texture: assets/ansia_sheet.png");
         }
@@ -51,7 +52,8 @@ public class BridgeScreen extends BaseScreen {
         player.update(dt);
         ds.update();
 
-        // ★ เพิ่มเข้ามา: ทำให้กล้องตามผู้เล่นไปทุกที่ ★
+        // เพิ่มเข้ามา: ทำให้กล้องตามผู้เล่นไปทุกที่
+        //Added: Make the camera follow the player
         cam.position.set(player.getX(), player.getY(), 0);
         cam.update();
         // -----------------------------------------

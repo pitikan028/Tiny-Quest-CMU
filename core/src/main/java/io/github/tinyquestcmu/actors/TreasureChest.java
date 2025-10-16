@@ -20,7 +20,7 @@ public class TreasureChest extends Entity {
         }
     }
 
-    // เมธอดสำหรับเปิดกล่อง
+    // เมธอดสำหรับเปิดกล่อง method for open treasurechest
     public void open() {
         if (!isOpen) {
             isOpen = true;

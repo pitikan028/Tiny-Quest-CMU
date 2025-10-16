@@ -21,6 +21,7 @@ public class RescueScreen extends BaseScreen {
 
     private Player player = new Player(200, 180);
     private NPC brother = new NPC("Brother", "Lost Sibling", 200, 220); // ปรับตำแหน่ง y ให้อยู่ในรั้ว
+    // Adjust y-position to be inside the fence
     private DialogueSystem ds = new DialogueSystem();
     private boolean freed = false;
 
@@ -37,22 +38,27 @@ public class RescueScreen extends BaseScreen {
     @Override
     public void render(float dt) {
         // 1. เรียก render ของ BaseScreen เพื่อตั้งค่า Viewport และเคลียร์จอ
+        // 1. Call BaseScreen's render to set up the Viewport and clear the screen
         super.render(dt);
 
         // 2. อัปเดตสถานะต่างๆ
+        // 2. Update various statuses
         player.update(dt);
         ds.update();
 
         // เพิ่มเข้ามา: ทำให้กล้องตามผู้เล่น
+        // Added: Make the camera follow the player
         cam.position.set(player.getX(), player.getY(), 0);
         cam.update();
         // ------------------------------------
 
         // 3. วาดแผนที่ TMX
+        // 3. Render the TMX map
         tiledRenderer.setView(cam);
         tiledRenderer.render();
 
         // 4. วาด Sprites (ใช้ batch ของเกมที่เลื่อนตามกล้อง)
+        // 4. Draw Sprites (use the game's batch that moves with the camera)
         game.batch.setProjectionMatrix(cam.combined);
         game.batch.begin();
         player.drawSprite(game.batch);
@@ -62,27 +68,31 @@ public class RescueScreen extends BaseScreen {
         game.batch.end();
 
         // 5. วาด UI (ใช้ hudBatch ที่ไม่เลื่อนตามกล้อง)
+        // 5. Draw UI (use hudBatch that doesn't move with the camera)
         hudBatch.begin();
         if (freed && !ds.isActive()) {
             game.font.draw(hudBatch, "Press ENTER to return home", 290, 84);
         }
         // วาด Dialogue ถ้ามี
+        // Draw Dialogue if active
         ds.draw(shapes, game.batch, game.font, 800);
         hudBatch.end();
 
 
         // 6. จัดการ Logic ของเกม
+        // 6. Handle game logic
         boolean near = brother.isPlayerNear(player.getBounds());
         if (near && !ds.isActive() && !freed) {
             Dialogue d = new Dialogue(new DialogueNode(
-                    "You found me! The tree protected me.",
-                    new DialogueNode("I'm free now—let's go home.", null)));
+                "You found me! The tree protected me.",
+                new DialogueNode("I'm free now—let's go home.", null)));
             ds.start(d);
             freed = true;
             game.questManager.set(QuestFlag.FREED_BROTHER);
         }
 
         // 7. ตรวจสอบ Input เพื่อเปลี่ยนหน้าจอ
+        // 7. Check for input to change the screen
         if (freed && !ds.isActive() && Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             game.setScreen(new EndingScreen(game));
         }
@@ -94,7 +104,8 @@ public class RescueScreen extends BaseScreen {
         if (map != null) map.dispose();
         if (tiledRenderer != null) tiledRenderer.dispose();
 
-        // ★ เพิ่มเข้ามา: dispose ตัวละครทั้งหมด ★
+        // เพิ่มเข้ามา: dispose ตัวละครทั้งหมด
+        // Added: dispose all characters
         if (player != null) player.dispose();
         if (brother != null) brother.dispose();
     }

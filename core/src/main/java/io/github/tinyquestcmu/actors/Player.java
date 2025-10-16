@@ -13,6 +13,7 @@ public class Player extends Entity {
     private String name = "Entaneer ISNE12";
 
     // --- Animation Textures ---
+    // --- เท็กซ์เจอร์สำหรับอนิเมชั่น ---
     private Texture[] frontFrames, backFrames, leftFrames, rightFrames;
     private Texture attackLeftTexture, attackRightTexture;
     private float animTime = 0f;
@@ -20,28 +21,32 @@ public class Player extends Entity {
     private int facing = 0;
 
     // --- Attack State ---
+    // --- สถานะการโจมตี ---
     private boolean isAttacking = false;
     private float attackAnimDuration = 0.3f;
     private float attackAnimTimer = 0f;
     private float attackCooldown = 0.5f;
     private float attackTimer = 0f;
 
-    // ★ 1. เพิ่มค่าคงที่สำหรับขนาดตัวละคร ★
+    // 1. เพิ่มค่าคงที่สำหรับขนาดตัวละคร
+    // 1. Add constants for character size
     private static final float NORMAL_WIDTH = 32;
     private static final float NORMAL_HEIGHT = 48;
-    private static final float ATTACK_WIDTH = 48;  // ขนาดใหม่ตอนโจมตี (ใหญ่ขึ้น 1.5 เท่า)
-    private static final float ATTACK_HEIGHT = 72; // ขนาดใหม่ตอนโจมตี (ใหญ่ขึ้น 1.5 เท่า)
+    private static final float ATTACK_WIDTH = 48;
+    private static final float ATTACK_HEIGHT = 72;
 
     public Player(float x, float y) {
         super(x, y, NORMAL_WIDTH, NORMAL_HEIGHT);
 
         try {
+            // โหลด Texture ท่าเดิน
             // Load walking textures
             frontFrames = new Texture[] { new Texture("assets/Char/Man_Stand.png"), new Texture("assets/Char/Man_StandLeft.png"), new Texture("assets/Char/Man_StandRight.png") };
             backFrames = new Texture[] { new Texture("assets/Char/Man_Back.png"), new Texture("assets/Char/Man_BackLeft.png"), new Texture("assets/Char/Man_BackRight.png") };
             leftFrames = new Texture[] { new Texture("assets/Char/Man_StandLeft.png"), new Texture("assets/Char/Man_Left1.png"), new Texture("assets/Char/Man_Left2.png") };
             rightFrames = new Texture[] { new Texture("assets/Char/Man_StandRight.png"), new Texture("assets/Char/Man_Right1.png"), new Texture("assets/Char/Man_Right2.png") };
 
+            // โหลด Texture ท่าโจมตี
             // Load attack textures
             attackLeftTexture = new Texture("assets/Char/Man_Attack_Left.png");
             attackRightTexture = new Texture("assets/Char/Man_Attack_Right.png");
@@ -60,6 +65,7 @@ public class Player extends Entity {
             return;
         }
 
+        // --- Logic การเคลื่อนไหว ---
         // --- Movement Logic ---
         isMoving = false;
         float dx = 0, dy = 0;
@@ -97,25 +103,28 @@ public class Player extends Entity {
         float drawWidth = NORMAL_WIDTH;
         float drawHeight = NORMAL_HEIGHT;
 
-        // ★ 2. แก้ไข Logic การวาดทั้งหมด ★
         if (isAttacking) {
             // ถ้ากำลังโจมตี, ให้ใช้ท่าโจมตีและขนาดใหญ่ขึ้น
+            // If attacking, use the attack pose and a larger size
             currentTexture = (facing == 1) ? attackLeftTexture : attackRightTexture;
             drawWidth = ATTACK_WIDTH;
             drawHeight = ATTACK_HEIGHT;
 
             // ปรับตำแหน่งการวาดเพื่อให้ขยายออกจากจุดศูนย์กลาง
+            // Adjust the drawing position to expand from the center
             drawX = x - (ATTACK_WIDTH - NORMAL_WIDTH) / 2;
             drawY = y - (ATTACK_HEIGHT - NORMAL_HEIGHT) / 2;
 
         } else if (!isMoving) {
             // ถ้าไม่เคลื่อนไหว, ให้ใช้ท่ายืน
+            // If not moving, use the standing pose
             if (facing == 0) currentTexture = frontFrames[0];
             else if (facing == 1) currentTexture = leftFrames[0];
             else if (facing == 2) currentTexture = rightFrames[0];
             else if (facing == 3) currentTexture = backFrames[0];
         } else {
             // ถ้าเคลื่อนไหว, ให้ใช้ท่าเดิน
+            // If moving, use the walking animation
             Texture[] walkFrames = (facing == 1) ? leftFrames : (facing == 2) ? rightFrames : (facing == 3) ? backFrames : frontFrames;
             int frameIndex = (int)(animTime * 6) % (walkFrames.length - 1) + 1;
             currentTexture = walkFrames[frameIndex];
@@ -137,6 +146,7 @@ public class Player extends Entity {
         if (attackRightTexture != null) attackRightTexture.dispose();
     }
 
+    // --- เมธอดอื่นๆ ---
     // --- Other methods ---
     @Override
     public void draw(ShapeRenderer shapes) { if (frontFrames == null) shapes.rect(x, y, w, h); }

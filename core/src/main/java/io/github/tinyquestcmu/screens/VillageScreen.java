@@ -40,7 +40,8 @@ public class VillageScreen extends BaseScreen {
             player = new Player(150, 250);
             exitToForest = new Rectangle(mapWidth - 32, 0, 32, mapHeight);
 
-            //แก้ไขตำแหน่งของกล่องสมบัติที่นี่
+            //แก้ไขตำแหน่งของกล่องสมบัติและสไลม์ที่นี่
+            //fix position of treasurechest and enemy here
             chest = new TreasureChest(40, 100);
             slime = new Enemy(100, 100);
 

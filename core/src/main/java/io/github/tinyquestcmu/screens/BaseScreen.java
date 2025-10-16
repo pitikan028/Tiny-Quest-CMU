@@ -17,7 +17,7 @@ public abstract class BaseScreen implements Screen {
     protected Viewport viewport;
     protected ShapeRenderer shapes;
 
-    // <<< STEP 1: Declare the new SpriteBatch for the HUD >>>
+    // STEP 1: Declare the new SpriteBatch for the HUD
     protected SpriteBatch hudBatch;
 
     public static final float WORLD_WIDTH = 800;
@@ -30,7 +30,7 @@ public abstract class BaseScreen implements Screen {
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, cam);
         shapes = new ShapeRenderer();
 
-        // <<< STEP 2: Create the new SpriteBatch >>>
+        // STEP 2: Create the new SpriteBatch
         hudBatch = new SpriteBatch();
     }
 
@@ -58,7 +58,7 @@ public abstract class BaseScreen implements Screen {
     @Override
     public void dispose() {
         shapes.dispose();
-        // <<< STEP 3: Dispose of the hudBatch to prevent memory leaks >>>
+        // STEP 3: Dispose of the hudBatch to prevent memory leaks
         if (hudBatch != null) {
             hudBatch.dispose();
         }

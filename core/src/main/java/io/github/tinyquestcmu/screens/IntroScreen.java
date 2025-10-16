@@ -21,6 +21,7 @@ public class IntroScreen extends BaseScreen {
 
     private Player player = new Player(380, 200);
     // เพิ่ม Rin และ Pavo กลับเข้ามา
+    // Add Rin and Pavo back in
     private NPC rin = new NPC("Rin", "Engineer", 240, 240);
     private NPC pavo = new NPC("Pavo", "Peaclock", 560, 240);
     private DialogueSystem ds = new DialogueSystem();
@@ -38,6 +39,7 @@ public class IntroScreen extends BaseScreen {
     @Override
     public void show() {
         // ใช้ Camera จาก BaseScreen, ไม่ต้องสร้างใหม่
+        // Use the Camera from BaseScreen, no need to create a new one
         try {
             tiledMap = new TmxMapLoader().load(MAP_FILE);
             tiledRenderer = new OrthogonalTiledMapRenderer(tiledMap);
@@ -48,19 +50,25 @@ public class IntroScreen extends BaseScreen {
 
     @Override
     public void render(float dt) {
-        super.render(dt); // สำคัญมาก: เรียก BaseScreen เพื่อจัดการ Camera และเคลียร์จอ
+        // สำคัญมาก: เรียก BaseScreen เพื่อจัดการ Camera และเคลียร์จอ
+        // Very important: Call BaseScreen to manage the Camera and clear the screen
+        super.render(dt);
 
-        //  ให้ Player จัดการการเคลื่อนไหวของตัวเอง
+        // ให้ Player จัดการการเคลื่อนไหวของตัวเอง
+        // Let the Player manage its own movement
         player.update(dt);
         ds.update();
 
         // --- วาดแผนที่ ---
+        // --- Render the map ---
         if (tiledRenderer != null) {
             tiledRenderer.setView(cam); // ใช้ cam จาก BaseScreen
+            // Use cam from BaseScreen
             tiledRenderer.render();
         }
 
         // --- วาดตัวละครทั้งหมด ---
+        // --- Draw all characters ---
         game.batch.setProjectionMatrix(cam.combined);
         game.batch.begin();
 
@@ -69,6 +77,7 @@ public class IntroScreen extends BaseScreen {
         pavo.drawSprite(game.batch);
 
         // วาดชื่อ
+        // Draw names
         player.drawLabel(game.batch, game.font);
         rin.drawLabel(game.batch, game.font);
         pavo.drawLabel(game.batch, game.font);
@@ -76,15 +85,19 @@ public class IntroScreen extends BaseScreen {
         game.batch.end();
 
         // --- วาด UI และ Dialogue ---
+        // --- Draw UI and Dialogue ---
         ds.draw(shapes, game.batch, game.font, 800);
 
         hudBatch.begin();
         if (!ds.isActive()) {
-            game.questManager.set(QuestFlag.TALKED_TO_PARENT); // อาจจะต้องเปลี่ยน Flag นี้ทีหลัง
+            game.questManager.set(QuestFlag.TALKED_TO_CMULEGEND); // อาจจะต้องเปลี่ยน Flag นี้ทีหลัง
+            // This Flag might need to be changed later
             game.font.draw(hudBatch, "Press ENTER to go to the bridge", 260, 80);
         }
         hudBatch.end();
 
+        // --- ตรวจสอบ Input เพื่อเปลี่ยนฉาก ---
+        // --- Handle input for changing screens ---
         if (!ds.isActive() && Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             game.setScreen(new BridgeScreen(game));
         }
@@ -96,7 +109,8 @@ public class IntroScreen extends BaseScreen {
         if (tiledRenderer != null) tiledRenderer.dispose();
         if (tiledMap != null) tiledMap.dispose();
 
-        //  เพิ่ม dispose ให้ครบทุกตัวละคร
+        // เพิ่ม dispose ให้ครบทุกตัวละคร
+        // Add dispose for all characters
         player.dispose();
         rin.dispose();
         pavo.dispose();

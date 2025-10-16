@@ -40,30 +40,36 @@ public class ForestScreen extends BaseScreen {
 
     @Override
     public void render(float dt) {
-        // ★ 1. เรียก BaseScreen เพื่อจัดการ Viewport และเคลียร์จอ ★
+        // 1. เรียก BaseScreen เพื่อจัดการ Viewport และเคลียร์จอ
+        // 1. Call BaseScreen to manage the Viewport and clear the screen
         super.render(dt);
 
         player.update(dt);
 
-        // ★ 2. เพิ่มโค้ดให้กล้องตามผู้เล่น ★
+        // 2. เพิ่มโค้ดให้กล้องตามผู้เล่น
+        // 2. Add code to make the camera follow the player
         cam.position.set(player.getX(), player.getY(), 0);
         cam.update();
         // ------------------------------------
 
         // --- วาดแผนที่ ---
+        // --- Render the map ---
         tiledRenderer.setView(cam);
         tiledRenderer.render();
 
         // --- วาดตัวละคร (ใช้ batch ของเกมที่เลื่อนตามกล้อง) ---
+        // --- Draw characters (use the game's batch that moves with the camera) ---
         game.batch.setProjectionMatrix(cam.combined);
         game.batch.begin();
         player.drawSprite(game.batch);
         specialTree.drawSprite(game.batch); // ควรวาด sprite ของ NPC ด้วย
+        // Should also draw the NPC's sprite
         player.drawLabel(game.batch, game.font);
         specialTree.drawLabel(game.batch, game.font);
         game.batch.end();
 
         // --- วาด UI (ใช้ hudBatch ที่ไม่เลื่อนตามกล้อง) ---
+        // --- Draw UI (use hudBatch that doesn't move with the camera) ---
         hudBatch.begin();
         boolean nearTree = specialTree.getBounds().overlaps(player.getBounds());
         if (nearTree) {
